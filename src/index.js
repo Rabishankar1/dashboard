@@ -1,13 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {
+  RouterProvider,
+} from "react-router-dom";
+import { router } from './routes';
+import { createTheme, ThemeProvider } from '@mui/material';
+import { blue, lime, red } from '@mui/material/colors';
+const appTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#557AFF',
+    },
+    secondary: {
+      main: '#EBF0FF',
+    },
+  },
+});
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={appTheme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
 

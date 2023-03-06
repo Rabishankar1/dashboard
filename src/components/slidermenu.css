@@ -1,0 +1,18 @@
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+    text-align: right;
+}
+
+.menu-icon {
+    flex: 0.3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E8EEFF;
+    color: #557AFF;
+    width: 35px;
+    height: 35px;
+    border-radius: 3px;
+}
