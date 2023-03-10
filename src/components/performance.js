@@ -27,9 +27,9 @@ const Performance = () => {
                 </Grid>
                 <Grid container sx={{ padding: '15px 16px 24px 26px' }}>
 
-                    <Grid item xs={12} xl={7} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src={chart} /></Grid>
+                    <Grid item xs={12} md={7} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}><img src={chart} width= '100%'/></Grid>
 
-                    <Grid item xs={12} xl={5} sx={{ borderLeft: '1px dashed #E5E6E9', display: 'flex' }}>
+                    <Grid item xs={12} md={5} sx={{ borderLeft: '1px dashed #E5E6E9', display: 'flex' }}>
 
                         <Box sx={{ padding: '23px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                             <Box sx={{ height: '37px', display: 'flex', justifyContent: 'center' }}>

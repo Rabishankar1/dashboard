@@ -1,6 +1,7 @@
-import { Box, Button, Collapse, Container, Grid, IconButton, InputAdornment, Paper, Select, Slide, TextField, Typography } from '@mui/material';
+import { AppBar, Box, Button, Collapse, Container, Grid, IconButton, InputAdornment, Menu, MenuItem, Paper, Select, Slide, TextField, Toolbar, Typography } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Stack } from '@mui/system';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import slidermenu from '../../components/slidermenu';
 import './dashboard.css';
 import LocalPostOfficeOutlinedIcon from '@mui/icons-material/LocalPostOfficeOutlined';
@@ -19,23 +20,47 @@ import AccountPopover from '../../components/AccountPopover';
 function Dashboard() {
   const containerRef = React.useRef(null);
 
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [windowSize, setWindowSize] = useState(window.innerWidth)
+  const [checked, setChecked] = useState(window.innerWidth > 600 ? true : false);
+  useEffect(() => {
 
-  const [checked, setChecked] = React.useState(true);
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+
+
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
 
+  const handleResize = () => {
+    if (window.innerWidth <= 600) {
+      setChecked(false)
+    }
+    setWindowSize(window.innerWidth);
+  }
+
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
 
   return (
     <Box className='dashboard' sx={{ position: 'relative' }}>
-      <Box className='dock' ref={containerRef} sx={{ position: 'absolute', display: 'flex', minHeight: '100vh', bottom: 0, top: 0 }}>
-        <Box className='dock' sx={{ height: '100%' }}>
+      {(windowSize > 600) ? (<Box className='dock' ref={containerRef} sx={{ position: 'absolute', display: 'flex', minHeight: '100vh', bottom: 0, top: 0 }}>
+        <Box sx={{ height: '100%' }}>
           <Collapse orientation="horizontal" in={checked} collapsedSize={85} sx={{ height: '100%' }}>
             {slidermenu(checked)}
           </Collapse>
         </Box>
 
-        <Paper className='sliding-button' sx={{
+        {windowSize > 600 && (<Paper className='sliding-button' sx={{
           width: '42px',
           height: '33px',
           backgroundColor: 'white',
@@ -47,11 +72,87 @@ function Dashboard() {
             {checked && (<Typography color={'#557AFF'}>&lt;</Typography>)}
             {!checked && (<Typography color={'#557AFF'}>&gt;</Typography>)}
           </IconButton>
-        </Paper>
+        </Paper>)}
+      </Box>) : (
+        <AppBar position="static" sx={{ backgroundColor: '#E8EEFF' }}>
 
-      </Box>
+          <Container maxWidth="xl">
+            <Toolbar disableGutters>
 
-      <Box className='content' sx={checked ? { paddingLeft: '200px' } : { paddingLeft: '100px' }}>
+              <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+                <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleOpenNavMenu}
+                  sx={{ color: 'black' }}
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorElNav}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}
+                  open={Boolean(anchorElNav)}
+                  onClose={handleCloseNavMenu}
+                  sx={{
+                    display: { xs: 'block', md: 'none' },
+                  }}
+                >
+                  {['Dashboard', 'Investor', 'Offerings', 'Reporting', 'Transactions'].map((page) => (
+                    <MenuItem key={page} onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center">{page}</Typography>
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </Box>
+
+              <Typography
+                variant="h5"
+                noWrap
+                // component="a"
+                // href=""
+                sx={{
+                  mr: 2,
+                  display: { xs: 'flex', md: 'none' },
+                  flexGrow: 1,
+                  fontFamily: 'monospace',
+                  fontWeight: 700,
+                  letterSpacing: '.3rem',
+                  color: 'black',
+                  textDecoration: 'none',
+                }}
+              >
+                LOGO
+              </Typography>
+
+              <Box sx={{ backgroundColor: 'white', width: '40px', height: '40px', marginRight: '45px', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <img src={search} height='50%' />
+              </Box>
+              <Box sx={{ backgroundColor: 'white', width: '40px', height: '40px', marginRight: '45px', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <img src={bell} height='50%' />
+              </Box>
+              <AccountPopover />
+
+            </Toolbar>
+          </Container>
+        </AppBar>
+
+
+      )}
+
+
+
+      <Box className='content' sx={checked ? { paddingLeft: '200px' } : windowSize > 600 ? { paddingLeft: '100px' } : { paddingLeft: 0 }}>
 
         <Box className='dashboard-header' sx={{
           paddingX: '40px',
@@ -60,7 +161,7 @@ function Dashboard() {
           alignItems: 'flex-end'
         }}>
           <Typography variant='h4' sx={{ fontWeight: 600, padding: '74px 0 24px 0' }}>Hi User!</Typography>
-          <Box sx={{ display: 'flex' }}>
+          {windowSize > 600 && (<Box sx={{ display: 'flex' }}>
             <Box sx={{ backgroundColor: '#E8EEFF', width: '40px', height: '40px', marginRight: '45px', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
               <img src={search} height='50%' />
             </Box>
@@ -68,7 +169,7 @@ function Dashboard() {
               <img src={bell} height='50%' />
             </Box>
             <AccountPopover />
-          </Box>
+          </Box>)}
         </Box>
 
         <Box sx={{

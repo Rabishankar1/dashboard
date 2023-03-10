@@ -14,10 +14,10 @@ import pie from '../pie.png';
 
 
 const targets = [
-    { name: 'Mutual Funds', achieved: '21.6K', total: '50k', color: '#EBF0FF', img: mutual, rect: mutualRect, rectColor: '#557AFF', percentage: '22.7%' },
-    { name: 'Insurance', achieved: '21.6K', total: '50k', color: '#F2F0FF', img: insurance, rect: insuranceRect, rectColor: '#8B55FF', percentage: '49.1%' },
-    { name: 'Digital Gold', achieved: '21.6K', total: '50k', color: '#FFF1DC', img: gold, rect: goldRect, rectColor: '#ED9C3A', percentage: '38.2%' },
-    { name: 'Bonds', achieved: '21.6K', total: '50k', color: '#E1F6FF', img: bonds, rect: bondRect, rectColor: '#55ADFF', percentage: '80.5%' },
+    { id: 1, name: 'Mutual Funds', achieved: '21.6K', total: '50k', color: '#EBF0FF', img: mutual, rect: mutualRect, rectColor: '#557AFF', percentage: '22.7%' },
+    { id: 2, name: 'Insurance', achieved: '21.6K', total: '50k', color: '#F2F0FF', img: insurance, rect: insuranceRect, rectColor: '#8B55FF', percentage: '49.1%' },
+    { id: 3, name: 'Digital Gold', achieved: '21.6K', total: '50k', color: '#FFF1DC', img: gold, rect: goldRect, rectColor: '#ED9C3A', percentage: '38.2%' },
+    { id: 4, name: 'Bonds', achieved: '21.6K', total: '50k', color: '#E1F6FF', img: bonds, rect: bondRect, rectColor: '#55ADFF', percentage: '80.5%' },
 ]
 
 const Targets = () => {
@@ -27,7 +27,7 @@ const Targets = () => {
         >
             <Grid container>
 
-                <Grid container item xs={12} xl={9}>
+                <Grid item xs={12} xl={9}>
                     <Box className='header' sx={{ borderBottom: '1px dashed #E5E6E9', width: '100%', padding: '25px 0 15px 26px' }}>
                         <Typography variant='h5' sx={{
                             fontWeight: 700
@@ -37,10 +37,10 @@ const Targets = () => {
                     </Box>
                     <Grid container sx={{ padding: '15px 16px 24px 26px' }}>
                         {targets.map(i => (
-                            <Grid item xs={12} xl={6} sx={{ padding: '8px' }}>
+                            <Grid key={i.id} item xs={12} xl={6} sx={{ padding: '8px' }}>
                                 <Paper className='target-logo-wrapper'>
                                     <Grid container>
-                                        <Grid className='left' xs={9} sx={{
+                                        <Grid item className='left' xs={9} sx={{
                                             display: 'flex',
                                             flexDirection: 'column',
                                             alignItems: 'flex-start',
@@ -80,7 +80,7 @@ const Targets = () => {
                                             </Box>
                                         </Grid>
 
-                                        <Grid className='right' xs={3} sx={{
+                                        <Grid item className='right' xs={3} sx={{
                                             display: 'flex',
                                             flexDirection: 'column',
                                             alignItems: 'flex-end',

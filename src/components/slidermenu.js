@@ -8,8 +8,8 @@ import transaction from '../transaction.png';
 import investment from '../investment.png';
 
 
-const slidermenu = (checked) => (<Paper sx={{ minHeight: '100%' }}>
-    <Box sx={{ backgroundColor: '#f8fbff', width: '190px', minHeight: '100%', paddingRight: '51px' }}>
+const slidermenu = (checked, windowSize) => (<Paper sx={{ minHeight: '100%', display: 'flex' }}>
+    <Box sx={{ backgroundColor: '#f8fbff', width: '190px', paddingRight: '51px' }}>
         {checked && (<Typography className='header-logo' variant='h5' sx={{
             padding: '66px 80px 71px 44px',
             // fontFamily: 'SF Pro Display',
@@ -20,7 +20,7 @@ const slidermenu = (checked) => (<Paper sx={{ minHeight: '100%' }}>
         }}
         >LOGO</Typography>)}
         {/* {!checked && (<Box sx={{ height: '150px' }}></Box>)} */}
-        <Stack sx={{ paddingLeft: '35px', paddingTop: '30px', paddingRight: '51px' }} spacing={8}>
+        <Stack direction='column' sx={{ paddingLeft: '35px', paddingTop: '30px', paddingRight: '51px' }} spacing={8}>
             <Box className='menu-item'>
                 <Typography sx={{
                     flex: 0.3,

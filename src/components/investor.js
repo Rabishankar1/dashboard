@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button, Grid, InputAdornment, Paper, Select, Table, TableHead, TableRow, TextField, Typography, TableBody, withStyles, makeStyles, MenuItem } from '@mui/material';
+import { Box, Button, Grid, InputAdornment, Paper, Select, Table, TableHead, TableRow, TextField, Typography, TableBody, withStyles, makeStyles, MenuItem, TableContainer } from '@mui/material';
 import arrowDown from '../arrowDown.png';
 import sipPie from '../sipPie.png';
 import SearchIcon from '@mui/icons-material/Search';
@@ -10,16 +10,16 @@ const rows = [
     { id: 1, logo: 'NT', name: 'Username 01', investment: '₹ 20,000.00', sip: '05', transaction: '04 Oct 2022', status: 'active' },
     { id: 2, logo: 'KG', name: 'Username 02', investment: '₹ 50,000.00', sip: '18', transaction: '29 Sep 2022', status: 'active' },
     { id: 3, logo: 'AA', name: 'Username 03', investment: '₹ 45,800.60', sip: '14', transaction: '20 Sep 2022', status: 'active' },
-    { id: 1, logo: 'MK', name: 'Username 01', investment: '₹ 8,000.40', sip: '02', transaction: '18 Sep 2022', status: 'In-Active' },
+    { id: 4, logo: 'MK', name: 'Username 01', investment: '₹ 8,000.40', sip: '02', transaction: '18 Sep 2022', status: 'In-Active' },
 ];
 
 function Investor() {
     // const classes = useStyles();
     return (
         <Paper className='invDetails' sx={{ padding: '6px', border: '1px solid #E7EAF3' }}>
-            <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between' }}>
+            <Box sx={{ display: 'flex', width: '100%', justifyContent: 'space-between', flexWrap: 'wrap' }}>
                 <Typography variant='h5' sx={{ padding: '25px', fontWeight: 700 }}>Investor Details</Typography>
-                <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
                     <Box sx={{ display: 'flex', alignItems: 'flex-end' }}>
                         <SearchIcon sx={{ mr: 1, my: 0.5 }} />
                         <TextField
@@ -60,40 +60,44 @@ function Investor() {
             </Box>
 
             <Paper>
-                <Table sx={{
-                    [`& .${tableCellClasses.root}`]: {
-                        borderBottom: "none"
-                    }
-                }}>
-                    <TableHead>
-                        <TableRow sx={{ borderBottom: '1px dashed #E9E9EA' }}>
-                            <TableCell sx={{ fontWeight: 700, fontSize: '14px', paddingLeft: '25px' }}>Investor's Names</TableCell>
-                            <TableCell sx={{ fontWeight: 700, fontSize: '14px' }} align="right">Total Investments</TableCell>
-                            <TableCell sx={{ fontWeight: 700, fontSize: '14px' }} align="right">Active SIPs</TableCell>
-                            <TableCell sx={{ fontWeight: 700, fontSize: '14px' }} align="right">Last Transactions</TableCell>
-                            <TableCell sx={{ fontWeight: 700, fontSize: '14px' }} align="right">Profile Status</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map(row => (
-                            <TableRow key={row.id}>
-                                <TableCell sx={{ color: '#636F86', fontWeight: 700, fontSize: '12px' }} component="th" scope="row">
-                                    <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                                        <Box sx={{ padding: '5px', margin: '9px', backgroundColor: '#F1F5FF', color: '#577BFF' }}>{row.logo}</Box>
-                                        {row.name}
-                                    </Box>
-                                </TableCell>
-                                <TableCell sx={{ color: '#636F86', fontWeight: 700, fontSize: '12px' }} align="right">{row.investment}</TableCell>
-                                <TableCell sx={{ color: '#636F86', fontWeight: 700, fontSize: '12px' }} align="right">{row.sip}</TableCell>
-                                <TableCell sx={{ color: '#636F86', fontWeight: 700, fontSize: '12px' }} align="right">{row.transaction}</TableCell>
-                                <TableCell sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>{row.status === 'active' ? <Box sx={{ backgroundColor: '#E7F3EB', color: '#51AC70', border: ' 0.7px #51AC70 solid', borderRadius: '4px', width: '70px', height: '19px', textAlign: 'center' }}>
-                                    Active
-                                </Box> : <Box sx={{ backgroundColor: '#FDF5EB', color: '#ED9C3A', border: ' 0.7px #ED9C3A    solid', borderRadius: '4px', width: '70px', height: '19px', textAlign: 'center' }}>
-                                    In-Active </Box>}</TableCell>
+                <TableContainer>
+                    <Table sx={{
+                        [`& .${tableCellClasses.root}`]: {
+                            borderBottom: "none"
+                        },
+                        width: "max-content"
+                    }}>
+                        <TableHead>
+                            <TableRow sx={{ borderBottom: '1px dashed #E9E9EA' }}>
+                                <TableCell sx={{ fontWeight: 700, fontSize: '14px', paddingLeft: '25px' }}>Investor's Names</TableCell>
+                                <TableCell sx={{ fontWeight: 700, fontSize: '14px' }} align="right">Total Investments</TableCell>
+                                <TableCell sx={{ fontWeight: 700, fontSize: '14px' }} align="right">Active SIPs</TableCell>
+                                <TableCell sx={{ fontWeight: 700, fontSize: '14px' }} align="right">Last Transactions</TableCell>
+                                <TableCell sx={{ fontWeight: 700, fontSize: '14px' }} align="right">Profile Status</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                        </TableHead>
+                        <TableBody>
+                            {rows.map(row => (
+                                <TableRow key={row.id}>
+                                    <TableCell sx={{ color: '#636F86', fontWeight: 700, fontSize: '12px' }} component="th" scope="row">
+                                        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                                            <Box sx={{ padding: '5px', margin: '9px', backgroundColor: '#F1F5FF', color: '#577BFF' }}>{row.logo}</Box>
+                                            {row.name}
+                                        </Box>
+                                    </TableCell>
+                                    <TableCell sx={{ color: '#636F86', fontWeight: 700, fontSize: '12px' }} align="right">{row.investment}</TableCell>
+                                    <TableCell sx={{ color: '#636F86', fontWeight: 700, fontSize: '12px' }} align="right">{row.sip}</TableCell>
+                                    <TableCell sx={{ color: '#636F86', fontWeight: 700, fontSize: '12px' }} align="right">{row.transaction}</TableCell>
+                                    <TableCell sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>{row.status === 'active' ? <Box sx={{ backgroundColor: '#E7F3EB', color: '#51AC70', border: ' 0.7px #51AC70 solid', borderRadius: '4px', width: '70px', height: '19px', textAlign: 'center' }}>
+                                        Active
+                                    </Box> : <Box sx={{ backgroundColor: '#FDF5EB', color: '#ED9C3A', border: ' 0.7px #ED9C3A    solid', borderRadius: '4px', width: '70px', height: '19px', textAlign: 'center' }}>
+                                        In-Active </Box>}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
             </Paper>
 
 
@@ -108,7 +112,7 @@ function Investor() {
                             </Typography>
                         </Box>
                         <Grid container sx={{ padding: '15px 16px 24px 26px' }}>
-                            <Grid item xs={12} lg={6} sx={{ paddingRight: '13px' }}>
+                            <Grid item xs={12} lg={6} sx={{ paddingRight: { xs: 0, lg: '13px' }, marginTop: '13px' }}>
                                 <Paper>
                                     <Box>
                                         <Box sx={{ display: 'flex', padding: '15px' }}>
@@ -130,7 +134,7 @@ function Investor() {
                                     </Box>
                                 </Paper>
                             </Grid>
-                            <Grid item xs={12} lg={6} sx={{ paddingLeft: '13px' }}>
+                            <Grid item xs={12} lg={6} sx={{ paddingLeft: { xs: 0, lg: '13px' }, marginTop: '13px' }}>
                                 <Paper>
                                     <Box>
                                         <Box sx={{ display: 'flex', padding: '15px' }}>
@@ -174,7 +178,7 @@ function Investor() {
                     </Grid>
                 </Grid>
             </Paper>
-        </Paper>
+        </Paper >
     )
 }
 
