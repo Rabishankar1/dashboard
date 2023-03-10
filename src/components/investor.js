@@ -65,7 +65,8 @@ function Investor() {
                         [`& .${tableCellClasses.root}`]: {
                             borderBottom: "none"
                         },
-                        width: "max-content"
+                        // width: "max-content"
+                        // width: "max-content"
                     }}>
                         <TableHead>
                             <TableRow sx={{ borderBottom: '1px dashed #E9E9EA' }}>
