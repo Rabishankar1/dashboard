@@ -177,7 +177,7 @@ function Dashboard() {
           marginTop: '20px'
         }}>
           <Grid container>
-            <Grid item xs={12} xl={9} sx={{
+            <Grid item xs={12} md={9} sx={{
               // border: 'red solid 2px',
               padding: '29px'
             }}>
@@ -188,13 +188,13 @@ function Dashboard() {
               </Stack>
 
             </Grid>
-            <Grid item xs={3} sx={{
+            <Grid item xs={12} md={3} sx={{
               // border: 'red solid 2px',
               padding: '25px',
-              display: { xs: 'none', xl: 'block' },
+              // display: { xs: 'none', xl: 'block' },
             }}>
               <Stack spacing={5}>
-                <Box >
+                <Box sx={{ display: { xs: 'none', xl: 'block' } }}>
                   <Paper sx={{ display: 'flex', flexDirection: 'column' }}>
                     <Box sx={{ margin: '22px' }} >Manager Name</Box>
                     <Box sx={{ color: '#636F86' }}><LocalPostOfficeOutlinedIcon sx={{ margin: '22px' }} />managername17@gmail.com</Box>
@@ -203,7 +203,7 @@ function Dashboard() {
                 </Box>
                 <Box >
                   <Stack spacing={3}>
-                    <Typography variant='h5' sx={{ fontWeight: 600 }}>Market Insigts</Typography>
+                    <Typography variant='h5' sx={{ fontWeight: 600 }}>Market Insights</Typography>
 
                     <Paper>
                       <Box sx={{ padding: '22px', display: 'flex', flexDirection: 'column', backgroundColor: '#F7F9FF' }}>
